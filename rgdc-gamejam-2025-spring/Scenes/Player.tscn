@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://rptfh2a2k68i"]
+[gd_scene load_steps=8 format=3 uid="uid://rptfh2a2k68i"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_6sbbt"]
 [ext_resource type="Texture2D" uid="uid://ehhi3o21r8l" path="res://Sprites/Sprites.png" id="1_yjrty"]
@@ -6,14 +6,42 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwfty"]
 size = Vector2(6, 14)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6lag"]
+atlas = ExtResource("1_yjrty")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeavh"]
+atlas = ExtResource("1_yjrty")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb0d5"]
+atlas = ExtResource("1_yjrty")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qwio"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6lag")
+}],
+"loop": true,
+"name": &"pounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeavh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pb0d5")
+}],
+"loop": true,
+"name": &"walkin",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_6sbbt")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("1_yjrty")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -22,3 +50,8 @@ shape = SubResource("RectangleShape2D_dwfty")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_4qwio")
+animation = &"pounce"
