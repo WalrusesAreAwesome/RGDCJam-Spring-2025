@@ -3,5 +3,7 @@
 [ext_resource type="FontFile" uid="uid://b7phxc42mmwoo" path="res://Fonts/cascadia-code-nerdfont.ttf" id="1_vofvj"]
 
 [resource]
+Button/font_sizes/font_size = 50
 Button/fonts/font = ExtResource("1_vofvj")
+Label/font_sizes/font_size = 50
 Label/fonts/font = ExtResource("1_vofvj")
