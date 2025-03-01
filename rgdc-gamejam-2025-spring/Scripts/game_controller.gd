@@ -1,4 +1,4 @@
-extends Node
+class_name game_controller extends Node
 
 
 var main_menu_path = "res://Scenes/MainMenu.tscn"
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 # update func
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	jon_test_scene()
 
 
@@ -35,17 +35,14 @@ func open_main_menu():
 	set_child_from_path(main_menu_path)
 
 
-
 # open game scene
 func open_game():
-	set_child_from_path(main_menu_path)
-
+	set_child_from_path(game_path)
 
 
 # pause game
 func open_pause_menu():
-	set_child_from_path(main_menu_path)
-
+	set_child_from_path(pause_menu_path)
 
 
 # load scene and set as child from given path
@@ -57,3 +54,12 @@ func set_child_from_path(path: String):
 		remove_child(child)
 	# add new scene as child
 	add_child(scene)
+
+
+
+
+## misc functions ##
+
+
+func quit_game() -> void:
+	get_tree().quit()
