@@ -4,6 +4,9 @@ class_name game_controller extends Node
 var main_menu_path = "res://Scenes/MainMenu.tscn"
 var game_path = "res://Scenes/Game.tscn"
 var jon_test_path = "res://Scenes/JonTestScene.tscn"
+var rat_test_path = "res://Scenes/RatTestScene.tscn"
+
+var player: player_controller
 
 
 
@@ -15,14 +18,22 @@ func _ready() -> void:
 # update func
 func _process(_delta: float) -> void:
 	jon_test_scene()
+	rat_test_scene()
 
 
 
 ## test scene shortcuts ##
 
+
 func jon_test_scene() -> void:
 	if Input.is_action_just_pressed("jon_test_scene"):
 		set_child_from_path(jon_test_path)
+
+
+func rat_test_scene() -> void:
+	if Input.is_action_just_pressed("rat_test_scene"):
+		set_child_from_path(rat_test_path)
+
 
 
 

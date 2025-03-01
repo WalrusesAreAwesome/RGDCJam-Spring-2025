@@ -1,0 +1,118 @@
+[gd_scene load_steps=5 format=3 uid="uid://crje84o5jjsmh"]
+
+[ext_resource type="PackedScene" uid="uid://rptfh2a2k68i" path="res://Scenes/Player.tscn" id="1_jhwfr"]
+[ext_resource type="PackedScene" uid="uid://bnwp25ae3y65u" path="res://Scenes/TestEnemy.tscn" id="2_e8ean"]
+[ext_resource type="Texture2D" uid="uid://c20oawegik5h2" path="res://icon.svg" id="3_howm4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01rv6"]
+size = Vector2(20, 200)
+
+[node name="RatTestScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_jhwfr")]
+
+[node name="TestEnemy" parent="." instance=ExtResource("2_e8ean")]
+
+[node name="walls" type="Node2D" parent="."]
+
+[node name="Wall 1" type="RigidBody2D" parent="walls"]
+position = Vector2(198, 0)
+disable_mode = 1
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Wall 1"]
+shape = SubResource("RectangleShape2D_01rv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="walls/Wall 1"]
+scale = Vector2(0.16, 1.57)
+texture = ExtResource("3_howm4")
+
+[node name="Wall 2" type="RigidBody2D" parent="walls"]
+position = Vector2(-265, -6)
+disable_mode = 1
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Wall 2"]
+shape = SubResource("RectangleShape2D_01rv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="walls/Wall 2"]
+scale = Vector2(0.16, 1.57)
+texture = ExtResource("3_howm4")
+
+[node name="Wall 3" type="RigidBody2D" parent="walls"]
+position = Vector2(-199, -169)
+rotation = 0.698762
+disable_mode = 1
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Wall 3"]
+shape = SubResource("RectangleShape2D_01rv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="walls/Wall 3"]
+scale = Vector2(0.16, 1.57)
+texture = ExtResource("3_howm4")
+
+[node name="Wall 4" type="RigidBody2D" parent="walls"]
+position = Vector2(-39, -238)
+rotation = 1.55763
+disable_mode = 1
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Wall 4"]
+shape = SubResource("RectangleShape2D_01rv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="walls/Wall 4"]
+scale = Vector2(0.16, 1.57)
+texture = ExtResource("3_howm4")
+
+[node name="Wall 5" type="RigidBody2D" parent="walls"]
+position = Vector2(128, -168)
+rotation = -0.781345
+disable_mode = 1
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Wall 5"]
+shape = SubResource("RectangleShape2D_01rv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="walls/Wall 5"]
+scale = Vector2(0.16, 1.57)
+texture = ExtResource("3_howm4")
+
+[node name="Wall 6" type="RigidBody2D" parent="walls"]
+position = Vector2(-198, 164)
+rotation = -0.720501
+disable_mode = 1
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Wall 6"]
+shape = SubResource("RectangleShape2D_01rv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="walls/Wall 6"]
+scale = Vector2(0.16, 1.57)
+texture = ExtResource("3_howm4")
+
+[node name="Wall 7" type="RigidBody2D" parent="walls"]
+position = Vector2(133, 170)
+rotation = 0.75474
+disable_mode = 1
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Wall 7"]
+shape = SubResource("RectangleShape2D_01rv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="walls/Wall 7"]
+scale = Vector2(0.16, 1.57)
+texture = ExtResource("3_howm4")
+
+[node name="Wall 8" type="RigidBody2D" parent="walls"]
+position = Vector2(-32, 240)
+rotation = 1.57401
+disable_mode = 1
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/Wall 8"]
+shape = SubResource("RectangleShape2D_01rv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="walls/Wall 8"]
+scale = Vector2(0.16, 1.57)
+texture = ExtResource("3_howm4")
