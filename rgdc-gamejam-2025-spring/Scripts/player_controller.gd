@@ -4,6 +4,7 @@ var isPouncing = false
 var pounceVelocity = Vector2.ZERO
 @export var walkSpeed = 50
 @export var pounceSpeed = 250
+var bounceTimer = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,10 +21,11 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if (!isPouncing and Input.is_action_just_pressed("pounce")):
 		update_pounce()
-	update_position()
+	update_position(delta)
 	var collided = move_and_slide()
 	if (isPouncing and collided):
 		isPouncing = false
+		bounceTimer = 0.15
 
 
 func update_pounce():
@@ -34,9 +36,14 @@ func update_pounce():
 	pounceVelocity *= pounceSpeed
 
 
-func update_position():
+func update_position(delta):
 	if (isPouncing):
 		velocity = pounceVelocity
+		return
+		
+	if (bounceTimer > 0):
+		bounceTimer -= delta
+		velocity = -pounceVelocity/5
 		return
 	
 	# Not pouncing
