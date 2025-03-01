@@ -4,7 +4,7 @@ class_name player_controller extends CharacterBody2D
 
 var isPouncing = false
 var pounceVelocity = Vector2.ZERO
-@export var walkSpeed = 50
+@export var walkSpeed = 75
 @export var pounceSpeed = 400
 var bounceTimer = 0
 
