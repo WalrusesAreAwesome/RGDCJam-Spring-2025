@@ -28,8 +28,8 @@ func update_position(delta):
 	if (Input.is_action_pressed("right")):
 		frameVelocity += Vector2(1, 0)
 	if (Input.is_action_pressed("up")):
-		frameVelocity += Vector2(-1, 0)
+		frameVelocity += Vector2(0, -1)
 	if (Input.is_action_pressed("down")):
-		frameVelocity += Vector2(1, 0)
+		frameVelocity += Vector2(0, 1)
 	
 	self.position += frameVelocity.normalized() * walkSpeed * delta
