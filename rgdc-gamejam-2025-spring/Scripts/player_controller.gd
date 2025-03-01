@@ -29,8 +29,6 @@ func _physics_process(delta: float) -> void:
 func update_pounce():
 	isPouncing = true
 	var mouse_pos = get_node("Camera2D").get_global_mouse_position()
-	print(mouse_pos)
-	print(position)
 	pounceVelocity = mouse_pos - position
 	pounceVelocity = pounceVelocity.normalized()
 	pounceVelocity *= pounceSpeed
