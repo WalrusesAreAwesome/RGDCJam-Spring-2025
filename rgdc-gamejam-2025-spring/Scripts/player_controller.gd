@@ -1,8 +1,8 @@
-extends Node
+extends CharacterBody2D
 
 var isPouncing = false
 var pounceVelocity = Vector2.ZERO
-var walkSpeed = 50
+@export var walkSpeed = 50
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,13 +12,18 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	update_position(delta)
+	
 	pass
 
 
-func update_position(delta):
+func _physics_process(delta: float) -> void:
+	update_position()
+	move_and_slide()
+
+
+func update_position():
 	if (isPouncing):
-		self.position += pounceVelocity * delta
+		self.position += pounceVelocity
 		pass
 	
 	# Not pouncing
@@ -32,4 +37,4 @@ func update_position(delta):
 	if (Input.is_action_pressed("down")):
 		frameVelocity += Vector2(0, 1)
 	
-	self.position += frameVelocity.normalized() * walkSpeed * delta
+	velocity = frameVelocity.normalized() * walkSpeed
