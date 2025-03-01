@@ -52,11 +52,13 @@ func try_become_grabbed(body):
 		is_grabbed = true
 		offset_from_player = position - player.position
 		on_grabbed.emit()
+		start_grab()
 
 # when grabbed, see if can get un-grabbed
 func try_not_get_grabbed():
 	if !player.isPouncing and is_grabbed:
 		is_grabbed = false
+		stop_grab()
 
 # how the enemy moves when grabbed by the player`
 func grab_movement():
@@ -81,4 +83,10 @@ func die():
 # how the enemy moves when not grabbed by the player
 # overwrite in inherited class
 func movement():
+	pass
+
+func start_grab():
+	pass
+
+func stop_grab():
 	pass

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://crje84o5jjsmh"]
 
 [ext_resource type="PackedScene" uid="uid://rptfh2a2k68i" path="res://Scenes/Player.tscn" id="1_jhwfr"]
-[ext_resource type="PackedScene" uid="uid://bnwp25ae3y65u" path="res://Scenes/TestEnemy.tscn" id="2_e8ean"]
+[ext_resource type="PackedScene" uid="uid://7hlonblpfcqs" path="res://Scenes/MeleeEnemy.tscn" id="3_bcxsq"]
 [ext_resource type="Texture2D" uid="uid://c20oawegik5h2" path="res://icon.svg" id="3_howm4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01rv6"]
@@ -10,8 +10,6 @@ size = Vector2(20, 200)
 [node name="RatTestScene" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_jhwfr")]
-
-[node name="TestEnemy" parent="." instance=ExtResource("2_e8ean")]
 
 [node name="walls" type="Node2D" parent="."]
 
@@ -116,3 +114,5 @@ shape = SubResource("RectangleShape2D_01rv6")
 [node name="Sprite2D" type="Sprite2D" parent="walls/Wall 8"]
 scale = Vector2(0.16, 1.57)
 texture = ExtResource("3_howm4")
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("3_bcxsq")]

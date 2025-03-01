@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://7hlonblpfcqs"]
+
+[ext_resource type="Script" path="res://Scripts/melee_enemy.gd" id="1_s4nly"]
+[ext_resource type="SpriteFrames" uid="uid://bx7t3k73rgvyx" path="res://Animations/melee_enemy_animations.tres" id="2_4y3fg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s7uvg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sj71x"]
+radius = 15.0
+
+[node name="MeleeEnemy" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_s4nly")
+move_speed = 30.0
+attack_dist = 700.0
+charge_time = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s7uvg")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_sj71x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_4y3fg")
+animation = &"walk"
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

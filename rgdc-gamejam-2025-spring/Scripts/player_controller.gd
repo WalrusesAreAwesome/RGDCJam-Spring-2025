@@ -2,21 +2,16 @@ class_name player_controller extends CharacterBody2D
 
 @onready var _animated_sprite = $AnimatedSprite2D
 
-var isPouncing = false
-var pounceVelocity = Vector2.ZERO
 @export var walkSpeed = 75
 @export var pounceSpeed = 400
+
+var isPouncing = false
+var pounceVelocity = Vector2.ZERO
 var bounceTimer = 0
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+signal on_death
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _physics_process(delta: float) -> void:
@@ -75,3 +70,10 @@ func update_velocity(delta):
 		_animated_sprite.stop()
 	
 	velocity = frameVelocity.normalized() * walkSpeed
+
+
+
+# kill the player
+func die():
+	on_death.emit()
+	visible = false
