@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlli7w5078ntm"]
+
+[ext_resource type="Script" path="res://Scripts/pause_menu_controller.gd" id="1_vqpvs"]
+[ext_resource type="Theme" uid="uid://efvpxi08xwhf" path="res://Themes/UiTheme.tres" id="2_3wq5p"]
+[ext_resource type="Theme" uid="uid://c711pc7hfrk3b" path="res://Themes/GameOver.tres" id="2_ulkrp"]
+
+[node name="GameOverMenu" type="CanvasLayer"]
+script = ExtResource("1_vqpvs")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_ulkrp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_3wq5p")
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_3wq5p")
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Main Menu" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit to main menu"
+
+[node name="Quit" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit to desktop"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Main Menu" to="." method="quit_to_menu"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Quit" to="." method="quit_to_desktop"]
