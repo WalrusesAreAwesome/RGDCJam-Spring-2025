@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name player_controller extends CharacterBody2D
 
 var isPouncing = false
 var pounceVelocity = Vector2.ZERO
