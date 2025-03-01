@@ -2,9 +2,12 @@ class_name melee_enemy extends enemy
 
 
 @export var move_speed: float
-@export var attack_dist: float
-@export var charge_time: float
+@export var avoidance_factor: float
+@export var avoidance_dist: float
+var avoidance_area: ShapeCast2D
 
+@export var charge_time: float
+@export var attack_dist: float
 var near_player: bool
 var time_spent_charging: float
 
@@ -15,15 +18,29 @@ var grabbed_anim = "grabbed"
 var idle_anim = "idle"
 var sprite_anim: AnimatedSprite2D 
 
-signal start_charging
-signal attack
+var melee_sprite: Sprite2D
+var melee_area: Area2D
+var attack_dir: Vector2
+var pivot: Node2D
+@export var charge_gradient: Gradient
+
+signal on_start_charging
+signal on_attack
 
 
+
+## built in overrides ##
 
 
 func _ready() -> void:
 	super()
 	sprite_anim = get_node("AnimatedSprite2D")
+	melee_sprite = get_node("Pivot/Melee Area/Sprite2D")
+	melee_area = get_node("Pivot/Melee Area")
+	pivot = get_node("Pivot")
+	# get avoidance area & set based on stored var
+	avoidance_area = get_node("Avoidance Area")
+	avoidance_area.scale *= avoidance_dist
 
 
 func _process(delta: float) -> void:
@@ -32,8 +49,9 @@ func _process(delta: float) -> void:
 	# check if near player
 	check_near_player()
 	
-	# update attack charge
+	# update various numbers
 	charge_attack(delta)
+	update_gradient()
 	
 	# try to attack
 	if near_player:
@@ -52,18 +70,35 @@ func check_near_player():
 
 func charge_attack(delta: float):
 	if near_player:
+		# start the charging
 		if time_spent_charging == 0:
-			start_charging.emit()
-			sprite_anim.play(start_charging_anim) 
+			start_charging()
 		time_spent_charging += delta
 	else:
 		time_spent_charging = 0
 
 
+func start_charging():
+	on_start_charging.emit()
+	sprite_anim.play(start_charging_anim) 
+	attack_dir = (player.position - position).normalized()
+	# rotate melee area towards player
+	pivot.look_at(player.position) 
+
+
 func try_attack():
 	if time_spent_charging >= charge_time:
+		on_attack.emit()
 		sprite_anim.play(attack_anim)
 		player.die()
+
+
+func update_gradient():
+	if near_player:
+		melee_sprite.visible = true
+		melee_sprite.modulate = charge_gradient.sample(time_spent_charging / charge_time)
+	else:
+		melee_sprite.visible = false
 
 
 
@@ -79,8 +114,30 @@ func movement():
 	# otherwise move towards player
 	else:
 		sprite_anim.play(walk_anim)
+		# point to player
 		var dir_to_player: Vector2 = player.position - position
 		velocity = dir_to_player.normalized() * move_speed
+		# avoid other enemies
+		velocity += avoidance()
+
+
+func avoidance() -> Vector2:
+	
+	# get nearby enemies from circlecast
+	var avoidance: Vector2 = Vector2.ZERO
+	for index in range(0,avoidance_area.get_collision_count()):
+		# skip if collider is null
+		if avoidance_area.get_collider(index) == null:
+			continue
+		var collider_pos = avoidance_area.get_collider(index).position
+		var dist = position.distance_to(collider_pos)
+		
+		# apply linear falloff based on dist
+		var scaled_dist = dist / avoidance_dist
+		avoidance += (1 - scaled_dist) * (position - collider_pos)
+	
+	# return amnt * avoidance factor
+	return avoidance
 
 
 
