@@ -3,7 +3,6 @@ class_name game_controller extends Node
 
 var main_menu_path = "res://Scenes/MainMenu.tscn"
 var game_path = "res://Scenes/Game.tscn"
-var pause_menu_path = "res://Scenes/"
 var jon_test_path = "res://Scenes/JonTestScene.tscn"
 
 
@@ -38,11 +37,6 @@ func open_main_menu():
 # open game scene
 func open_game():
 	set_child_from_path(game_path)
-
-
-# pause game
-func open_pause_menu():
-	set_child_from_path(pause_menu_path)
 
 
 # load scene and set as child from given path
