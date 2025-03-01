@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://7hlonblpfcqs"]
+[gd_scene load_steps=5 format=3 uid="uid://blj6pd82i64ui"]
 
 [ext_resource type="Script" path="res://Scripts/melee_enemy.gd" id="1_s4nly"]
 [ext_resource type="SpriteFrames" uid="uid://bx7t3k73rgvyx" path="res://Animations/melee_enemy_animations.tres" id="2_4y3fg"]
@@ -26,6 +26,7 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_sj71x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = ExtResource("2_4y3fg")
 animation = &"walk"
 
