@@ -3,7 +3,7 @@ class_name player_controller extends CharacterBody2D
 var isPouncing = false
 var pounceVelocity = Vector2.ZERO
 @export var walkSpeed = 50
-@export var pounceSpeed = 250
+@export var pounceSpeed = 400
 var bounceTimer = 0
 
 
@@ -14,7 +14,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	pass
 
 
