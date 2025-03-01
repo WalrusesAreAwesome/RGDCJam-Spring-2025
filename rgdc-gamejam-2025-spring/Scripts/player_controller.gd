@@ -8,6 +8,7 @@ class_name player_controller extends CharacterBody2D
 var isPouncing = false
 var pounceVelocity = Vector2.ZERO
 var bounceTimer = 0
+var pounceTimer = 0
 
 signal on_death
 
@@ -15,14 +16,17 @@ signal on_death
 
 
 func _physics_process(delta: float) -> void:
-	if (!isPouncing and Input.is_action_just_pressed("pounce")):
+	if (!isPouncing and Input.is_action_just_pressed("pounce") and pounceTimer <= 0):
 		update_pounce()
+		
 	update_velocity(delta)
 	flip_sprite_right_way()
 	var collided = move_and_slide()
+	
 	if (isPouncing and collided):
 		isPouncing = false
 		_animated_sprite.play("walkin")
+		pounceTimer = 0.4
 		bounceTimer = 0.15
 
 func flip_sprite_right_way():
@@ -52,6 +56,9 @@ func update_velocity(delta):
 		if (bounceTimer <= 0):
 			_animated_sprite.stop()
 		return
+		
+	if (pounceTimer > 0):
+		pounceTimer -= delta
 	
 	# Not pouncing
 	var frameVelocity = Vector2.ZERO

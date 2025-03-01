@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://bx7t3k73rgvyx"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://bx7t3k73rgvyx"]
 
 [ext_resource type="Texture2D" uid="uid://ehhi3o21r8l" path="res://Sprites/Sprites.png" id="1_f58hs"]
 
@@ -26,9 +26,13 @@ region = Rect2(32, 48, 16, 16)
 atlas = ExtResource("1_f58hs")
 region = Rect2(32, 64, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_la4vi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnjqg"]
 atlas = ExtResource("1_f58hs")
-region = Rect2(16, 16, 16, 16)
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7eam"]
+atlas = ExtResource("1_f58hs")
+region = Rect2(48, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_af3n4"]
 atlas = ExtResource("1_f58hs")
@@ -81,7 +85,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_la4vi")
+"texture": SubResource("AtlasTexture_jnjqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7eam")
 }],
 "loop": true,
 "name": &"grabbed",
