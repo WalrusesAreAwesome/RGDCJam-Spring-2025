@@ -10,6 +10,7 @@ var avoidance_area: ShapeCast2D
 @export var attack_dist: float
 var near_player: bool
 var time_spent_charging: float
+var charging: bool
 
 var start_charging_anim = "start_charging"
 var attack_anim = "attack"
@@ -49,13 +50,22 @@ func _process(delta: float) -> void:
 	# check if near player
 	check_near_player()
 	
-	# update various numbers
-	charge_attack(delta)
-	update_gradient()
+	# if grabbed, dont do anything
+	if is_grabbed:
+		stop_charging()
 	
-	# try to attack
-	if near_player:
-		try_attack()
+	else:
+		# update charging
+		if near_player:
+			charging = true
+		
+		# update various numbers
+		charge_attack(delta)
+		update_gradient()
+		
+		# try to attack
+		if near_player:
+			try_attack()
 
 
 
@@ -69,7 +79,7 @@ func check_near_player():
 
 
 func charge_attack(delta: float):
-	if near_player:
+	if charging:
 		# start the charging
 		if time_spent_charging == 0:
 			start_charging()
@@ -81,9 +91,11 @@ func charge_attack(delta: float):
 func start_charging():
 	on_start_charging.emit()
 	sprite_anim.play(start_charging_anim) 
-	attack_dir = (player.position - position).normalized()
-	# rotate melee area towards player
-	pivot.look_at(player.position) 
+	show_attack_area()
+
+
+func stop_charging():
+	charging = false
 
 
 func try_attack():
@@ -91,14 +103,29 @@ func try_attack():
 		on_attack.emit()
 		sprite_anim.play(attack_anim)
 		player.die()
+	stop_charging()
 
 
 func update_gradient():
-	if near_player:
-		melee_sprite.visible = true
-		melee_sprite.modulate = charge_gradient.sample(time_spent_charging / charge_time)
-	else:
-		melee_sprite.visible = false
+	melee_sprite.modulate = charge_gradient.sample(time_spent_charging / charge_time)
+
+
+
+
+## attack area ##
+
+
+func show_attack_area():
+	# rotate melee area towards player
+	attack_dir = (player.position - position).normalized()
+	pivot.look_at(player.position) 
+	# unhide sprite
+	melee_sprite.visible = true
+
+
+func hide_attack_area():
+	# hide sprite
+	melee_sprite.visible = false
 
 
 
@@ -147,3 +174,6 @@ func avoidance() -> Vector2:
 
 func start_grab():
 	sprite_anim.play(grabbed_anim)
+	# stop attacking
+	charging = false
+	hide_attack_area()

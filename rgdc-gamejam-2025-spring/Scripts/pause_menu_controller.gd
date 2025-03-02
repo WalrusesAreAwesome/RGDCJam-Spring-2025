@@ -23,6 +23,10 @@ func enable_pause_menu(enabled: bool) -> void:
 	# set visible from given bool
 	visible = enabled
 	is_paused = enabled
+	if enabled:
+		Engine.time_scale = 0
+	else:
+		Engine.time_scale = 1
 
 
 
