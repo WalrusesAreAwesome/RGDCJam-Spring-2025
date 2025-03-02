@@ -77,7 +77,7 @@ func _on_area_2d_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_in
 func die():
 	on_killed.emit()
 	var node = load(explosion_path).instantiate()
-	node.position = position
+	node.position = position 
 	get_parent().add_child(node)
 	queue_free()
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://rptfh2a2k68i"]
+[gd_scene load_steps=11 format=3 uid="uid://rptfh2a2k68i"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_6sbbt"]
 [ext_resource type="Texture2D" uid="uid://ehhi3o21r8l" path="res://Sprites/Sprites.png" id="1_yjrty"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="2_lxjrg"]
+[ext_resource type="AudioStream" uid="uid://dkr6hd2bwq2t1" path="res://Sounds/WHISTLE Down Long.wav" id="4_n8018"]
+[ext_resource type="AudioStream" uid="uid://r8c2y3rbfq78" path="res://Sounds/WHSH_Whoosh Short 06_JSE_TW1.mp3" id="5_n35md"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwfty"]
 size = Vector2(6, 14)
@@ -62,3 +64,11 @@ animation = &"pounce"
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
+
+[node name="Slide Whistle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_n8018")
+
+[node name="Whoosh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_n35md")
+volume_db = -3.438
+pitch_scale = 0.62

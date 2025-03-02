@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://bdbqw2b0eux5n"]
+[gd_scene load_steps=22 format=3 uid="uid://bdbqw2b0eux5n"]
 
 [ext_resource type="Texture2D" uid="uid://6bq64nd74rkr" path="res://Sprites/ExplosionSheet.png" id="1_301eh"]
 [ext_resource type="Script" path="res://Scripts/explosion.gd" id="2_qug6f"]
+[ext_resource type="AudioStream" uid="uid://dk2nx8oa5hgem" path="res://Sounds/deltarune-explosion.mp3" id="3_jovej"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dy2x"]
 atlas = ExtResource("1_301eh")
@@ -137,3 +138,7 @@ animation = &"kaboom babey"
 frame = 16
 frame_progress = 1.0
 script = ExtResource("2_qug6f")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jovej")
+volume_db = -7.011

@@ -1,6 +1,9 @@
 class_name player_controller extends CharacterBody2D
 
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var camera = $Camera2D
+@onready var slide_whistle = $"Slide Whistle"
+@onready var whoosh = $"Whoosh"
 
 @export var walkSpeed = 75
 @export var pounceSpeed = 400
@@ -23,11 +26,16 @@ func _physics_process(delta: float) -> void:
 	flip_sprite_right_way()
 	var collided = move_and_slide()
 	
+	if (isPouncing):
+		camera.set_screen_shake(0.1, 1)
+	
 	if (isPouncing and collided):
 		isPouncing = false
 		_animated_sprite.play("walkin")
 		pounceTimer = 0.4
 		bounceTimer = 0.15
+		camera.set_screen_shake(0.2, 3)
+
 
 func flip_sprite_right_way():
 	if (velocity.x < 0):
@@ -38,8 +46,10 @@ func flip_sprite_right_way():
 
 func update_pounce():
 	isPouncing = true
+	whoosh.pitch_scale = randf_range(0.6, 0.9)
+	whoosh.play()
 	_animated_sprite.play("pounce")
-	var mouse_pos = get_node("Camera2D").get_global_mouse_position()
+	var mouse_pos = camera.get_global_mouse_position()
 	pounceVelocity = mouse_pos - position
 	pounceVelocity = pounceVelocity.normalized()
 	pounceVelocity *= pounceSpeed
@@ -83,4 +93,6 @@ func update_velocity(delta):
 # kill the player
 func die():
 	on_death.emit()
+	if (visible):
+		slide_whistle.play()
 	visible = false
