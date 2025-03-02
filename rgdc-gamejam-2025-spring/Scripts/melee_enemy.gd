@@ -48,21 +48,22 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
-	# check if near player
-	check_near_player()
-	
 	# if grabbed, dont do anything
-	if is_grabbed:
-		stop_charging()
-	
-	else:
-		# update charging
-		if near_player:
-			charging = true
+	if !is_grabbed:
+		
+		# check if near player
+		var now_near_player = check_near_player()
+		if now_near_player != near_player:
+			near_player = now_near_player
+			if near_player:
+				start_charging()
+			else:
+				stop_charging()
 		
 		# update various numbers
-		charge_attack(delta)
-		update_gradient()
+		if charging:
+			time_spent_charging += delta
+			update_gradient()
 		
 		# try to attack
 		if near_player:
@@ -74,30 +75,23 @@ func _process(delta: float) -> void:
 ## attacking functions ##
 
 
-func check_near_player():
+func check_near_player() -> bool:
 	var dist_to_player = player.position.distance_squared_to(position)
-	near_player = dist_to_player <= attack_dist
-
-
-func charge_attack(delta: float):
-	if charging:
-		# start the charging
-		if time_spent_charging == 0:
-			start_charging()
-		time_spent_charging += delta
-	else:
-		time_spent_charging = 0
+	return dist_to_player <= attack_dist
 
 
 func start_charging():
+	charging = true
 	on_start_charging.emit()
 	sprite_anim.play(start_charging_anim) 
+	time_spent_charging = 0
 	show_attack_area()
 
 
 func stop_charging():
-	charging = false
 	on_stop_charging.emit()
+	charging = false
+	hide_attack_area()
 
 
 func try_attack():
@@ -105,7 +99,8 @@ func try_attack():
 		on_attack.emit()
 		sprite_anim.play(attack_anim)
 		player.die()
-	stop_charging()
+		time_spent_charging = 0
+		stop_charging()
 
 
 func update_gradient():
@@ -177,5 +172,4 @@ func avoidance() -> Vector2:
 func start_grab():
 	sprite_anim.play(grabbed_anim)
 	# stop attacking
-	charging = false
-	hide_attack_area()
+	stop_charging()

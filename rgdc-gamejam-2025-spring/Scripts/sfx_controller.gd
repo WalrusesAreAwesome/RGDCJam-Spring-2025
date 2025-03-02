@@ -1,4 +1,4 @@
-extends AudioStreamPlayer
+extends AudioStreamPlayer2D
 
 
 func play_sound():
@@ -8,5 +8,6 @@ func play_sound():
 
 
 func stop_sound():
-	self.stop()
-	self.playing = false
+	if playing:
+		self.stop()
+		self.playing = false

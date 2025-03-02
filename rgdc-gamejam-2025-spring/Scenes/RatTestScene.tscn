@@ -117,12 +117,3 @@ texture = ExtResource("3_howm4")
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("3_bcxsq")]
 position = Vector2(97, 57)
-
-[node name="MeleeEnemy2" parent="." instance=ExtResource("3_bcxsq")]
-position = Vector2(-118, -85)
-
-[node name="MeleeEnemy3" parent="." instance=ExtResource("3_bcxsq")]
-position = Vector2(61, -90)
-
-[node name="MeleeEnemy4" parent="." instance=ExtResource("3_bcxsq")]
-position = Vector2(-101, 67)
