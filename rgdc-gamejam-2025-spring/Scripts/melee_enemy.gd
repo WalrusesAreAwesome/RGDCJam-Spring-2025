@@ -26,6 +26,7 @@ var pivot: Node2D
 @export var charge_gradient: Gradient
 
 signal on_start_charging
+signal on_stop_charging
 signal on_attack
 
 
@@ -96,6 +97,7 @@ func start_charging():
 
 func stop_charging():
 	charging = false
+	on_stop_charging.emit()
 
 
 func try_attack():
