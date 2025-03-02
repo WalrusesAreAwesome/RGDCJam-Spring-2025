@@ -8,18 +8,16 @@ var player_path = "res://Scenes/Player.tscn"
 var game: game_controller
 var player: player_controller
 
+var round_duration: float = 0
+
 
 
 
 func _ready() -> void:
 	# get game_controller
 	game = get_tree().root.get_child(0)
+	game.game_scene = self
 
 
 func _process(delta: float) -> void:
-	pass
-
-
-
-
-## functions for managing the in-game events
+	round_duration += delta

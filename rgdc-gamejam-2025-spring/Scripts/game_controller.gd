@@ -8,6 +8,8 @@ var rat_test_path = "res://Scenes/RatTestScene.tscn"
 
 var player: player_controller
 
+var game_scene: game_scene_controller
+
 
 
 # when app starts, create main menu

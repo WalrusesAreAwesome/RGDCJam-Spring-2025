@@ -1,12 +1,14 @@
 class_name melee_enemy extends enemy
 
 
-@export var move_speed: float
+@export var base_move_speed: float
+var move_speed: float
 @export var avoidance_factor: float
 @export var avoidance_dist: float
 var avoidance_area: ShapeCast2D
 
-@export var charge_time: float
+@export var base_charge_time: float
+var charge_time: float
 @export var attack_dist: float
 var near_player: bool
 var time_spent_charging: float
@@ -24,6 +26,11 @@ var melee_area: Area2D
 var attack_dir: Vector2
 var pivot: Node2D
 @export var charge_gradient: Gradient
+
+@export var charge_scaling_factor: float
+@export var speed_scaling_factor: float
+
+var game: game_controller
 
 signal on_start_charging
 signal on_stop_charging
@@ -43,10 +50,14 @@ func _ready() -> void:
 	# get avoidance area & set based on stored var
 	avoidance_area = get_node("Avoidance Area")
 	avoidance_area.scale *= avoidance_dist
+	#get and store game controller
+	game = get_tree().root.get_child(0)
 
 
 func _process(delta: float) -> void:
 	super(delta)
+	
+	scale_power()
 	
 	# if grabbed, dont do anything
 	if !is_grabbed:
@@ -68,6 +79,22 @@ func _process(delta: float) -> void:
 		# try to attack
 		if near_player:
 			try_attack()
+
+
+
+
+## power scalng factor ##
+
+
+func scale_power():
+	if game.game_scene != null:
+		var round_duration = game.game_scene.round_duration
+		move_speed = base_move_speed + round_duration * speed_scaling_factor
+		charge_time = base_charge_time - round_duration * charge_scaling_factor
+		if charge_time < 0.1:
+			charge_time = 0.1
+	else:
+		print("warning! no game_scene_controller found!")
 
 
 
