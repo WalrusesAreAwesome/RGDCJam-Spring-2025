@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlli7w5078ntm"]
+[gd_scene load_steps=4 format=3 uid="uid://c6b5gnm6oriul"]
 
-[ext_resource type="Script" path="res://Scripts/pause_menu_controller.gd" id="1_vqpvs"]
+[ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_thee8"]
 [ext_resource type="Theme" uid="uid://efvpxi08xwhf" path="res://Themes/UiTheme.tres" id="2_3wq5p"]
-[ext_resource type="Theme" uid="uid://c711pc7hfrk3b" path="res://Themes/GameOver.tres" id="2_ulkrp"]
+[ext_resource type="Theme" uid="uid://cbb4oi0gjgjkx" path="res://Themes/GameOver.tres" id="2_ulkrp"]
 
 [node name="GameOverMenu" type="CanvasLayer"]
-script = ExtResource("1_vqpvs")
+script = ExtResource("1_thee8")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -40,13 +40,13 @@ alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="Main Menu" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Quit to main menu"
+text = "Restart"
 
 [node name="Quit" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit to desktop"
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Main Menu" to="." method="quit_to_menu"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Quit" to="." method="quit_to_desktop"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Restart" to="." method="restart_game"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Quit" to="." method="quit_game"]

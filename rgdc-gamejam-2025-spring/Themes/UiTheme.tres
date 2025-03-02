@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://efvpxi08xwhf"]
 
-[ext_resource type="FontFile" uid="uid://b7phxc42mmwoo" path="res://Fonts/cascadia-code-nerdfont.ttf" id="1_vofvj"]
+[ext_resource type="FontFile" uid="uid://cjb6aquj8y5n3" path="res://Fonts/alphabeta.ttf" id="1_pfmtk"]
 
 [resource]
 Button/font_sizes/font_size = 50
-Button/fonts/font = ExtResource("1_vofvj")
+Button/fonts/font = ExtResource("1_pfmtk")
 Label/font_sizes/font_size = 50
-Label/fonts/font = ExtResource("1_vofvj")
+Label/fonts/font = ExtResource("1_pfmtk")

@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://quba132f7fvm"]
 
-[ext_resource type="Texture2D" uid="uid://bmcn5r6yrssgr" path="res://Sprites/square.png" id="1_e4kc5"]
 [ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="1_juuop"]
+[ext_resource type="SpriteFrames" uid="uid://ddaf4ba3fn2ee" path="res://Animations/spawner_animation.tres" id="1_mxf8s"]
 [ext_resource type="PackedScene" uid="uid://7hlonblpfcqs" path="res://Scenes/MeleeEnemy.tscn" id="2_sbtp1"]
 
-[node name="EnemySpawner" type="Sprite2D"]
-scale = Vector2(0.195, 0.195)
-texture = ExtResource("1_e4kc5")
+[node name="EnemySpawner" type="AnimatedSprite2D"]
+z_index = 4
+texture_filter = 1
+sprite_frames = ExtResource("1_mxf8s")
 script = ExtResource("1_juuop")
 enemy = ExtResource("2_sbtp1")
 spawn_per_second = 0.3
